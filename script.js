@@ -9,6 +9,7 @@ const text = document.getElementById("text")
 
 toggle.addEventListener("change",()=>{
 if(toggle.checked){
+
 heart.textContent="❤"
 heart.style.color="#ff2d55"
 
@@ -16,6 +17,7 @@ setTimeout(()=>{
 card.style.display="none"
 game.style.display="flex"
 },600)
+
 }
 })
 
@@ -47,6 +49,7 @@ if(cells[a]=="X"){
 
 message.innerHTML="Selamat kamu memenangkan hatiku ❤️"
 
+// ubah X jadi ❤️
 document.querySelectorAll(".cell").forEach(cell=>{
 if(cell.innerHTML=="X"){
 cell.innerHTML="❤️"
@@ -70,8 +73,10 @@ if(gameOver) return
 let empty=[]
 
 cells.forEach((c,i)=>{
-if(c=="") empty.push(i)
+if(c==="") empty.push(i)
 })
+
+if(empty.length===0) return
 
 let move=empty[Math.floor(Math.random()*empty.length)]
 
@@ -82,7 +87,7 @@ board.children[move].innerHTML="O"
 
 function clickCell(i){
 
-if(cells[i]!==""||gameOver) return
+if(cells[i]!=="" || gameOver) return
 
 cells[i]="X"
 board.children[i].innerHTML="X"
@@ -104,45 +109,55 @@ board.appendChild(cell)
 /* LETTER */
 
 const letterText=`Hai Odi sayang, selamat bulan pertama!
-Aku ga tahu harus mulai dari mana,
-tapi mungkin dari hal paling sederhana:
-aku senang ada kamu.
+Pertama-tama aku mau bilang terima kasih sama kamu karena udah memilih aku sebagai pasangan kamu,
+tapi aku minta maaf mungkin belum bisa jadi yang terbaik buat kamu dan aku bakal usahain jadi yang terbaik buat kamu.
+Aku selalu bersyukur bisa kenal sama kamu dan milikin kamu seperti sekarang,
+kamu sangat berharga buat aku,
+kamu sangat spesial buat aku,
+aku senang ada kamu di hidup aku,
+dan buat hidup aku jadi lebih berwarna di banding hari-hari kemarin.
 
-Bukan karena semuanya selalu berjalan mulus,
-tapi karena setiap hal yang kita lewati
-terasa lebih berarti sejak ada kamu.
+Setiap hari jadi lebih berarti sejak ada kamu di kehidupan aku,
+kamu ngajarin aku banyak hal,
+walaupun bukan secara langsung,
+tapi dengan kamu negur aku,
+dengan cara kamu melihat dunia,
+aku jadi belajar banyak hal yang berbeda dari sudut pandangan aku.
 
-Aku suka cara kamu hadir,
-tanpa perlu jadi sempurna, 
-tapi kamu udah sempurna di mata aku sih.
+Kamu mungkin bukan orang yang sempurna,
+tapi di pandangan aku,
+kamu udah lebih dari sempurna buat aku.
+Kamu sempurna seperti bidadari,
+kamu manis seperti madu,
+tapi kamu juga pencuri,
+tanpa sadar kamu ambil semuanya,
+hati aku, pikiran aku, dan perhatian aku.
+Tapi aku ga masalah kamu mengambil semuanya dari aku, 
+aku rela asal itu kamu.
+Aku mau beri semua yang aku bisa buat kamu, 
+kamu segalanya buat aku,
+kamu duniaku, kamu semestaku.
 
-Dan tanpa sadar,
-itu bikin aku juga merasa cukup
-jadi diri sendiri di dekat kamu.
-
-Aku kadang bingung,
-kamu itu sebenarnya bidadari atau beneran manusia ya?
-kamu secantik bidadari tapi kamu suka mencuri
-kamu ngambil semuanya, kamu ngambil hati aku, pikiran aku, dan perhatian aku
-semuanya kamu ambil.`
-
-let i=0
+Aku minta maaf ga bisa ngeluarin isi hati semuanya,
+tapi yang jelas aku sayang banget sama kamu,
+aku bener bener sesayang itu sama kamu,
+aku cinta sama kamu,
+perasaan aku bener-bener sedalam ini sama kamu.
+I really love u, i love u so much.
+Selamat tanggal 3 yang pertama sayang!`
 
 function showLetter(){
+
 game.style.display="none"
 letter.style.display="flex"
-typeText()
-}
 
-function typeText(){
+// reset text biar tidak dobel
+text.innerHTML = letterText
 
-if(i<letterText.length){
-text.innerHTML+=letterText.charAt(i)
-i++
-setTimeout(typeText,30)
-}else{
-setTimeout(showFlower,1000)
-}
+// lanjut ke bunga setelah 4 detik (biar sempat dibaca)
+setTimeout(()=>{
+showFlower()
+},4000)
 
 }
 
@@ -171,27 +186,35 @@ ctx.moveTo(200,320)
 ctx.lineTo(200,220)
 ctx.stroke()
 
-// bunga (kelopak spiral)
-for(let i=0;i<10;i++){
+// bunga spiral aesthetic
+for(let i=0;i<12;i++){
 
-let a = angle + i * 0.6
+let a = angle + i * 0.5
 
-let x = 200 + Math.cos(a) * (10 + i*6)
-let y = 220 + Math.sin(a) * (10 + i*6)
+let radius = 10 + i*7
+
+let x = 200 + Math.cos(a) * radius
+let y = 220 + Math.sin(a) * radius
 
 ctx.beginPath()
 
-// warna gradasi pink
 let gradient = ctx.createRadialGradient(x,y,5,x,y,25)
 gradient.addColorStop(0,"#ff8fa3")
 gradient.addColorStop(1,"#ff4d6d")
 
 ctx.fillStyle=gradient
 
-ctx.arc(x,y,15,0,Math.PI*2)
+// glow biar lebih bagus
+ctx.shadowBlur = 15
+ctx.shadowColor = "#ff4d6d"
+
+ctx.arc(x,y,14,0,Math.PI*2)
 ctx.fill()
 
 }
+
+// reset shadow biar teks tidak blur
+ctx.shadowBlur = 0
 
 // tengah bunga
 ctx.beginPath()
