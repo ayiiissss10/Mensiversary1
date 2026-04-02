@@ -45,7 +45,7 @@ gameOver=true
 
 if(cells[a]=="X"){
 
-message.innerHTML="Kamu memenangkan hatiku ❤️"
+message.innerHTML="Selamat kamu memenangkan hatiku ❤️"
 
 document.querySelectorAll(".cell").forEach(cell=>{
 if(cell.innerHTML=="X"){
@@ -157,40 +157,62 @@ canvas.style.display="block"
 
 const ctx=canvas.getContext("2d")
 
-ctx.fillStyle="#2b0014"
-ctx.fillRect(0,0,400,400)
+let angle=0
 
-/* batang */
-ctx.strokeStyle="green"
-ctx.lineWidth=5
+function draw(){
+
+ctx.clearRect(0,0,400,400)
+
+// batang
+ctx.strokeStyle="#2d6a4f"
+ctx.lineWidth=6
 ctx.beginPath()
-ctx.moveTo(200,300)
-ctx.lineTo(200,200)
+ctx.moveTo(200,320)
+ctx.lineTo(200,220)
 ctx.stroke()
 
-/* kelopak */
-for(let i=0;i<8;i++){
+// bunga (kelopak spiral)
+for(let i=0;i<10;i++){
 
-let angle=i*Math.PI/4
-let x=200+Math.cos(angle)*60
-let y=200+Math.sin(angle)*60
+let a = angle + i * 0.6
+
+let x = 200 + Math.cos(a) * (10 + i*6)
+let y = 220 + Math.sin(a) * (10 + i*6)
 
 ctx.beginPath()
-ctx.fillStyle="pink"
-ctx.arc(x,y,30,0,Math.PI*2)
+
+// warna gradasi pink
+let gradient = ctx.createRadialGradient(x,y,5,x,y,25)
+gradient.addColorStop(0,"#ff8fa3")
+gradient.addColorStop(1,"#ff4d6d")
+
+ctx.fillStyle=gradient
+
+ctx.arc(x,y,15,0,Math.PI*2)
 ctx.fill()
+
 }
 
-/* tengah */
+// tengah bunga
 ctx.beginPath()
-ctx.fillStyle="yellow"
-ctx.arc(200,200,25,0,Math.PI*2)
+ctx.fillStyle="#ffd166"
+ctx.arc(200,220,12,0,Math.PI*2)
 ctx.fill()
 
-/* teks */
+// teks
 ctx.fillStyle="white"
 ctx.font="20px Poppins"
 ctx.textAlign="center"
-ctx.fillText("I Love You ❤️",200,350)
+ctx.fillText("I Love You ❤️",200,360)
+
+// animasi mekar
+if(angle < 6){
+angle += 0.05
+requestAnimationFrame(draw)
+}
+
+}
+
+draw()
 
 }
