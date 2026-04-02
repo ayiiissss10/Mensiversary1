@@ -17,7 +17,6 @@ width:280px;
 height:300px;
 border-radius:25px;
 background:rgba(255,255,255,0.05);
-backdrop-filter: blur(10px);
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -27,7 +26,6 @@ align-items:center;
 .bigHeart{
 font-size:70px;
 color:#555;
-transition:0.3s;
 }
 
 .title{
@@ -52,7 +50,6 @@ width:100%;
 height:100%;
 border-radius:40px;
 cursor:pointer;
-transition:0.3s;
 }
 
 .slider:before{
@@ -105,11 +102,6 @@ align-items:center;
 justify-content:center;
 font-size:40px;
 cursor:pointer;
-transition:0.2s;
-}
-
-.cell:hover{
-background:rgba(255,255,255,0.2);
 }
 
 /* LETTER */
@@ -126,33 +118,16 @@ justify-content:center;
 align-items:center;
 }
 
-/* box surat */
-
 .letter-box{
 width:80%;
 max-width:500px;
 background:rgba(255,255,255,0.05);
 padding:30px;
 border-radius:20px;
-backdrop-filter: blur(10px);
 line-height:1.8;
 }
-
-/* teks surat */
 
 #text{
 white-space:pre-line;
 text-align:center;
-font-size:16px;
-}
-
-/* OPTIONAL: fade halus */
-
-.letter{
-opacity:0;
-transition:0.8s;
-}
-
-.letter.show{
-opacity:1;
 }

@@ -49,7 +49,6 @@ if(cells[a]=="X"){
 
 message.innerHTML="Selamat kamu memenangkan hatiku ❤️"
 
-// ubah X jadi ❤️
 document.querySelectorAll(".cell").forEach(cell=>{
 if(cell.innerHTML=="X"){
 cell.innerHTML="❤️"
@@ -151,7 +150,7 @@ function showLetter(){
 game.style.display="none"
 letter.style.display="flex"
 
-// tampilkan langsung tanpa efek
+// langsung tampil
 text.innerHTML = letterText
 
 }
