@@ -106,7 +106,7 @@ cell.addEventListener("click",()=>clickCell(i))
 board.appendChild(cell)
 }
 
-/* LETTER */
+/* LOVE LETTER */
 
 const letterText=`Hai Odi sayang, selamat bulan pertama!
 Pertama-tama aku mau bilang terima kasih sama kamu karena udah memilih aku sebagai pasangan kamu,
@@ -151,91 +151,7 @@ function showLetter(){
 game.style.display="none"
 letter.style.display="flex"
 
-// reset text biar tidak dobel
+// tampilkan langsung tanpa efek
 text.innerHTML = letterText
-
-// lanjut ke bunga setelah 4 detik (biar sempat dibaca)
-setTimeout(()=>{
-showFlower()
-},4000)
-
-}
-
-/* FLOWER */
-
-function showFlower(){
-
-letter.style.display="none"
-
-const canvas=document.getElementById("flowerCanvas")
-canvas.style.display="block"
-
-const ctx=canvas.getContext("2d")
-
-let angle=0
-
-function draw(){
-
-ctx.clearRect(0,0,400,400)
-
-// batang
-ctx.strokeStyle="#2d6a4f"
-ctx.lineWidth=6
-ctx.beginPath()
-ctx.moveTo(200,320)
-ctx.lineTo(200,220)
-ctx.stroke()
-
-// bunga spiral aesthetic
-for(let i=0;i<12;i++){
-
-let a = angle + i * 0.5
-
-let radius = 10 + i*7
-
-let x = 200 + Math.cos(a) * radius
-let y = 220 + Math.sin(a) * radius
-
-ctx.beginPath()
-
-let gradient = ctx.createRadialGradient(x,y,5,x,y,25)
-gradient.addColorStop(0,"#ff8fa3")
-gradient.addColorStop(1,"#ff4d6d")
-
-ctx.fillStyle=gradient
-
-// glow biar lebih bagus
-ctx.shadowBlur = 15
-ctx.shadowColor = "#ff4d6d"
-
-ctx.arc(x,y,14,0,Math.PI*2)
-ctx.fill()
-
-}
-
-// reset shadow biar teks tidak blur
-ctx.shadowBlur = 0
-
-// tengah bunga
-ctx.beginPath()
-ctx.fillStyle="#ffd166"
-ctx.arc(200,220,12,0,Math.PI*2)
-ctx.fill()
-
-// teks
-ctx.fillStyle="white"
-ctx.font="20px Poppins"
-ctx.textAlign="center"
-ctx.fillText("I Love You ❤️",200,360)
-
-// animasi mekar
-if(angle < 6){
-angle += 0.05
-requestAnimationFrame(draw)
-}
-
-}
-
-draw()
 
 }
